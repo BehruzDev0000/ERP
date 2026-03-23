@@ -43,19 +43,31 @@ const CustomSelect:FC<CustomSelectType> = ({extraClass, requestTitle, params, fi
         }
     }) 
 
-    function handleChange(e:ChangeEvent<HTMLSelectElement>){
+    function handleChange(e: ChangeEvent<HTMLSelectElement>) {
         setValue(e)
     }
+
+    const getPlaceholder = () => {
+        switch (requestTitle) {
+            case '/teachers': return "O'qituvchi tanlang"
+            case '/students': return "O'quvchi tanlang"
+            case '/groups': return "Guruh tanlang"
+            case '/rooms': return "Xona tanlang"
+            case '/stacks': return "Stack tanlang"
+            default: return "Tanlang"
+        }
+    }
+
     return (
         <Select
             disabled={disabled}
             value={value}
             onChange={handleChange}
-            className={`w-70! ${extraClass}`}
+            className={`min-w-[200px] ${extraClass}`}
             allowClear
             size="large"
             showSearch={{ optionFilterProp: 'label' }}
-            placeholder={`Choose ${requestTitle.split("").splice(1).join("")}`}
+            placeholder={getPlaceholder()}
             options={data}
         />
     )

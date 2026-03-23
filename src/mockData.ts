@@ -3,19 +3,21 @@
 export const USE_MOCK_DATA = true; // Set to false when server is working
 
 export const mockStacks = [
-  { id: 1, name: "Frontend", description: "HTML, CSS, JavaScript, React" },
-  { id: 2, name: "Backend", description: "Node.js, Express, PostgreSQL" },
-  { id: 3, name: "Mobile", description: "React Native, Flutter" },
-  { id: 4, name: "DevOps", description: "Docker, Kubernetes, AWS" },
-  { id: 5, name: "Python", description: "Django, FastAPI, Machine Learning" },
+  { id: 1, name: "Frontend", description: "HTML, CSS, JavaScript, React, Vue.js, Angular va boshqa frontend texnologiyalari" },
+  { id: 2, name: "Backend", description: "Node.js, Express, NestJS, PostgreSQL, MongoDB va server tomonidagi texnologiyalar" },
+  { id: 3, name: "Mobile", description: "React Native, Flutter, Swift, Kotlin - mobil ilovalar yaratish" },
+  { id: 4, name: "DevOps", description: "Docker, Kubernetes, AWS, CI/CD - infratuzilma va avtomatlashtirish" },
+  { id: 5, name: "Python", description: "Django, FastAPI, Machine Learning, Data Science" },
+  { id: 6, name: "UI/UX Design", description: "Figma, Adobe XD, Sketch - foydalanuvchi interfeysi dizayni" },
 ];
 
 export const mockRooms = [
-  { id: 1, name: "Room 101", capacity: 20 },
-  { id: 2, name: "Room 102", capacity: 15 },
-  { id: 3, name: "Room 103", capacity: 30 },
-  { id: 4, name: "Room 201", capacity: 25 },
-  { id: 5, name: "Room 202", capacity: 18 },
+  { id: 1, name: "101-xona", capacity: 20 },
+  { id: 2, name: "102-xona", capacity: 15 },
+  { id: 3, name: "103-xona", capacity: 30 },
+  { id: 4, name: "201-xona", capacity: 25 },
+  { id: 5, name: "202-xona", capacity: 18 },
+  { id: 6, name: "Konferens zal", capacity: 50 },
 ];
 
 export const mockTeachers = [

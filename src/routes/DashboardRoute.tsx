@@ -40,11 +40,13 @@ const DashboardRoute = () => {
     }
   ]
   return (
-    <div className="flex">
+    <div className="flex bg-background min-h-screen">
       <Sitebar />
-      <div className={`${collepsed ? "w-full" : "w-[78%]"} duration-300 h-screen overflow-y-auto`}>
+      <div className={`flex-1 duration-300 h-screen overflow-y-auto`}>
         <Header />
-        <Routes>{list.map(item => <Route key={item.id} path={item.path} element={item.element} />)}</Routes>
+        <div className="p-6">
+          <Routes>{list.map(item => <Route key={item.id} path={item.path} element={item.element} />)}</Routes>
+        </div>
       </div>
     </div>
   )
