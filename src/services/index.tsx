@@ -2,20 +2,33 @@ import { QueryClient, useMutation, useQuery } from "@tanstack/react-query"
 import { instance } from "../hooks"
 import toast from "react-hot-toast"
 import type { NavigateFunction } from "react-router-dom"
+import { USE_MOCK_DATA, getMockDataByUrl, getMockDataById } from "../mockData"
 
 export const GetAll = (filerProp: any[], URL: string, token: string, QueryPathname: string, params?: any) => {
     const data = useQuery<any[]>({
         queryKey: [QueryPathname, [...filerProp]],
-        queryFn: () => instance(token).get(URL, {
-            params: params ? params : {}
-        }).then(res => res.data.data)
+        queryFn: async () => {
+            if (USE_MOCK_DATA) {
+                // Return mock data when server is not available
+                return getMockDataByUrl(URL, params)
+            }
+            return instance(token).get(URL, {
+                params: params ? params : {}
+            }).then(res => res.data.data)
+        }
     })
     return data
 }
 export const GetById = (QueryPathname: string, id: string | undefined, token: string, URL: string) => {
     const data = useQuery(({
         queryKey: [QueryPathname, id],
-        queryFn: () => instance(token).get(`${URL}/${id}`).then(res => res.data.data),
+        queryFn: async () => {
+            if (USE_MOCK_DATA) {
+                // Return mock data when server is not available
+                return getMockDataById(URL, id)
+            }
+            return instance(token).get(`${URL}/${id}`).then(res => res.data.data)
+        },
     }))
     return data
 }

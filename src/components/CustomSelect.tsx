@@ -3,6 +3,7 @@ import { Select } from 'antd'
 import { type ChangeEvent, type FC } from 'react'
 import { instance } from '../hooks'
 import { useCookies } from 'react-cookie'
+import { USE_MOCK_DATA, getMockDataByUrl } from '../mockData'
 
 interface CustomSelectType {
     extraClass?:string,
@@ -20,16 +21,26 @@ const CustomSelect:FC<CustomSelectType> = ({extraClass, requestTitle, params, fi
     const [cookies] = useCookies(['token'])
     const {data = []} = useQuery({
         queryKey:[queryKey, filterProps && [...filterProps]],
-        queryFn:() => instance(cookies.token).get(requestTitle, {
-            params:params ? params : {}
-            // Filter params ozgarishi mumkin
-        }).then(res => res.data.data.map((item:any) => {
-            const data = {
-                label: requestTitle == "/teachers" || requestTitle == "/students" ? `${item.firstName} ${item.lastName}` : `${item.name}`,
-                value:item.id
+        queryFn: async () => {
+            if (USE_MOCK_DATA) {
+                // Return mock data when server is not available
+                const mockData = getMockDataByUrl(requestTitle, params)
+                return mockData.map((item: any) => ({
+                    label: requestTitle === "/teachers" || requestTitle === "/students" 
+                        ? `${item.firstName} ${item.lastName}` 
+                        : `${item.name}`,
+                    value: item.id
+                }))
             }
-            return data
-        }))
+            return instance(cookies.token).get(requestTitle, {
+                params: params ? params : {}
+            }).then(res => res.data.data.map((item: any) => ({
+                label: requestTitle === "/teachers" || requestTitle === "/students" 
+                    ? `${item.firstName} ${item.lastName}` 
+                    : `${item.name}`,
+                value: item.id
+            })))
+        }
     }) 
 
     function handleChange(e:ChangeEvent<HTMLSelectElement>){
