@@ -2,13 +2,10 @@ import { Route, Routes } from "react-router-dom"
 import { PATH } from "../components"
 import { DashboardHome, GroupMore, Groups, GroupsCrud, Rooms, StackCrud, StackMore, Stacks, Students, StudentsCrud, StudentsMore, TeacherCrud, TeacherMore, Teachers } from "../pages"
 import { Header, Sitebar } from "../modules"
-import { useContext } from "react"
-import { Context } from "../context/Context"
 import RoomMore from "../pages/Dashboard/Rooms/RoomMore"
 import RoomCrud from "../pages/Dashboard/Rooms/RoomCrud"
 
 const DashboardRoute = () => {
-  const { collepsed } = useContext(Context)
   const list = [
     { id: 1, path: PATH.home, element: <DashboardHome /> },
     { id: 2, path: PATH.stacks, element: <Stacks /> },
